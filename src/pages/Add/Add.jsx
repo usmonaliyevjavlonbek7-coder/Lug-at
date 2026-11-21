@@ -5,6 +5,7 @@ function Add({ data, setData }) {
     const [uzb, setUzb] = useState("")
     const [category, setCategory] = useState("")
     const [ing, setIng] = useState("")
+
     return (
         <>
             <section className="section3">
@@ -15,14 +16,15 @@ function Add({ data, setData }) {
                             id: Math.floor(Math.random() * 999999),
                             english: ing,
                             uzbek: uzb,
-                            category: category
+                            category: category,
+                            learned: false
                         }
                         if (uzb == "" || ing == "" || category == "") {
                             alert("Ma'lumotlarni to'liq kiriting")
                         } else {
                             setData(prev => [...prev, obj])
 
-                            
+
                         }
                     }} action="">
                         <div className="row">

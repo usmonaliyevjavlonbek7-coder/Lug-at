@@ -1,10 +1,16 @@
 import React, { useState } from 'react'
 import './Home.css'
 
-function Home({ data }) {
+function Home({ data, setData }) {
     const [plus, setPlus] = useState(0)
 
-
+    const keyingiSoz = () => {
+        if (plus >= data.length - 1) {
+            setPlus(0)
+        } else {
+            setPlus(plus + 1)
+        }
+    }
 
     return (
         <>
@@ -26,18 +32,17 @@ function Home({ data }) {
                 <div className="container">
                     <div className="btns">
                         <button onClick={() => {
-                            if (plus >= data.length - 1) {
-                                setPlus(0)
-                            } else {
-                                setPlus(plus + 1)
-                            }
+                            setData(prev => prev.map((item, i) =>
+                                i === plus ? { ...item, learned: true } : item
+                            ))
+                            keyingiSoz()
                         }} className="btn-yodladim">Yodladim</button>
+
                         <button onClick={() => {
-                            if (plus >= data.length - 1) {
-                                setPlus(0)
-                            } else {
-                                setPlus(plus + 1)
-                            }
+                            setData(prev => prev.map((item, i) =>
+                                i === plus ? { ...item, learned: false } : item
+                            ))
+                            keyingiSoz()
                         }} className="btn-yodlamadim">Yodlamadim</button>
                     </div>
                 </div>

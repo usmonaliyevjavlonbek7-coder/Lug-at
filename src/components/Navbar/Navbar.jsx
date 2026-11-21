@@ -4,6 +4,7 @@ import { IoHome } from 'react-icons/io5'
 import './Navbar.css'
 import { NavLink } from 'react-router-dom'
 import { FaRegNoteSticky } from 'react-icons/fa6'
+import { PiInfoFill } from 'react-icons/pi'
 
 function Navbar() {
     return (
@@ -16,6 +17,7 @@ function Navbar() {
                     <NavLink to={"/"}><IoHome className='icon' /> <h3>Bosh Sahifa</h3></NavLink>
                     <NavLink to={"/add"}><IoMdAdd className='icon2' /> <h3>So'z Qo'shish</h3></NavLink>
                     <NavLink to={"/test"}><FaRegNoteSticky className='icon' /> <h3>Test</h3></NavLink>
+                    <NavLink to={"/info"}><PiInfoFill className='icon' /> <h3>Infos</h3></NavLink>
                 </div>
             </div>
         </nav>
