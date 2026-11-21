@@ -22,9 +22,7 @@ function Add({ data, setData }) {
                         } else {
                             setData(prev => [...prev, obj])
 
-                            setCategory("")
-                            setIng("")
-                            setUzb("")
+                            
                         }
                     }} action="">
                         <div className="row">
