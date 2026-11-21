@@ -1,0 +1,102 @@
+.section1 {
+    display: flex;
+    justify-content: center;
+    padding-top: 80px;
+}
+
+.card {
+    position: relative;
+    width: 500px;
+    background-color: #1e1e24;
+    border: 1px solid #333;
+    border-radius: 12px;
+    padding: 20px;
+    color: white;
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-top: 10px;
+}
+
+.category-text {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    margin: 0;
+    font-size: 14px;
+    color: #a78bfa;
+}
+
+.word-title {
+    margin: 0;
+    margin-top: 15px;
+    font-size: 36px;
+}
+
+hr {
+    width: 100%;
+    border: none;
+    border-top: 1px solid #444;
+    margin: 15px 0;
+}
+
+.word-translation {
+    margin: 0;
+    margin-bottom: 15px;
+    font-size: 28px;
+    color: #ddd;
+}
+
+.box p {
+    margin: 0;
+    font-size: 14px;
+    color: #888;
+}
+
+.box span {
+    color: #f472b6;
+    font-weight: bold;
+}
+
+.section2 {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.btns {
+    display: flex;
+    gap: 15px;
+}
+
+.btn-yodladim,
+.btn-yodlamadim {
+    padding: 10px 25px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    color: white;
+}
+
+.btn-yodladim {
+    background-color: #10b981;
+    transition: all 0.1s ease-in-out;
+}
+
+.btn-yodladim:hover {
+    box-shadow: 1px 1px 10px #10b981;
+}
+
+.btn-yodlamadim {
+    background-color: #ef4444;
+    transition: all 0.1s ease-in-out;
+}
+
+.btn-yodlamadim:hover {
+    box-shadow: 1px 1px 10px #ef4444;
+}

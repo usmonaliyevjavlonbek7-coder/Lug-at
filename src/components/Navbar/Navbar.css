@@ -1,0 +1,43 @@
+nav .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0px;
+}
+
+nav .logo h1 {
+    color: white;
+}
+
+nav .btns {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+nav .btns a {
+    display: block;
+    background-color: transparent;
+    border: none;
+    color: white;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+}
+
+nav .btns a:hover {
+    color: darkgrey;
+}
+
+nav .btns a.active {
+    color: darkgrey;
+}
+
+nav .btns a .icon {
+    font-weight: 900;
+    font-size: 20px;
+}
+
+.icon2 {
+    font-weight: 900;
+    font-size: 20px;
+}
