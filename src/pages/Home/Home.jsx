@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import './Home.css'
 
-function Home({ data, setData }) {
-    const [plus, setPlus] = useState(0)
+function Home({ sozlar, setSozlar }) {
+    const [raqam, setRaqam] = useState(0)
 
     const keyingiSoz = () => {
-        if (plus >= data.length - 1) {
-            setPlus(0)
+        if (raqam >= sozlar.length - 1) {
+            setRaqam(0)
         } else {
-            setPlus(plus + 1)
+            setRaqam(raqam + 1)
         }
     }
 
@@ -18,10 +18,10 @@ function Home({ data, setData }) {
                 <div className="container">
                     <div className="card">
                         <div className="box">
-                            <h3 className="category-text">{data[plus].category}</h3>
-                            <h1 className="word-title">{data[plus].english}</h1>
+                            <h3 className="category-text">{sozlar[raqam].kategoriya}</h3>
+                            <h1 className="word-title">{sozlar[raqam].inglizcha}</h1>
                             <hr />
-                            <h1 className="word-translation">{data[plus].uzbek}</h1>
+                            <h1 className="word-translation">{sozlar[raqam].ozbekcha}</h1>
                             <p className='word-misol'>I know a 28 of <span>words</span></p>
                         </div>
                     </div>
@@ -32,15 +32,15 @@ function Home({ data, setData }) {
                 <div className="container">
                     <div className="btns">
                         <button onClick={() => {
-                            setData(prev => prev.map((item, i) =>
-                                i === plus ? { ...item, learned: true } : item
+                            setSozlar(oldingi => oldingi.map((soz, i) =>
+                                i === raqam ? { ...soz, yodlangan: true } : soz
                             ))
                             keyingiSoz()
                         }} className="btn-yodladim">Yodladim</button>
 
                         <button onClick={() => {
-                            setData(prev => prev.map((item, i) =>
-                                i === plus ? { ...item, learned: false } : item
+                            setSozlar(oldingi => oldingi.map((soz, i) =>
+                                i === raqam ? { ...soz, yodlangan: false } : soz
                             ))
                             keyingiSoz()
                         }} className="btn-yodlamadim">Yodlamadim</button>

@@ -1,62 +1,78 @@
 import React, { useState, useEffect } from 'react'
 import './Test.css'
 
-function Test({ data }) {
-    const [currentIndex, setCurrentIndex] = useState(0)
-    const [options, setOptions] = useState([])
-    const [selected, setSelected] = useState("")
-    const [isFinished, setIsFinished] = useState(false)
+function Test({ sozlar }) {
+    const [raqam, setRaqam] = useState(0)
+    const [variantlar, setVariantlar] = useState([])
+    const [tugadi, setTugadi] = useState(false)
+    const [vaqt, setVaqt] = useState(10)
 
     useEffect(() => {
-        if (currentIndex < data.length) {
-            const correct = data[currentIndex].english
-            let list = [correct]
+        if (tugadi) {
+            return
+        }
+        setVaqt(10)
+        const interval = setInterval(() => {
+            setVaqt(oldingi => oldingi > 0 ? oldingi - 1 : 0)
+        }, 1000)
+        return () => clearInterval(interval)
+    }, [raqam, tugadi])
 
-            while (list.length < 3 && list.length < data.length) {
-                let randomNumber = Math.floor(Math.random() * data.length)
-                let randomWord = data[randomNumber].english
+    useEffect(() => {
+        if (vaqt === 0 && !tugadi) {
+            alert("Vaqt tugadi!")
+            keyingiSavol()
+        }
+    }, [vaqt])
 
-                if (!list.includes(randomWord)) {
-                    list.push(randomWord)
+    useEffect(() => {
+        if (raqam < sozlar.length) {
+            const togri = sozlar[raqam].inglizcha
+            let royxat = [togri]
+
+            while (royxat.length < 3 && royxat.length < sozlar.length) {
+                let tasodifiyRaqam = Math.floor(Math.random() * sozlar.length)
+                let tasodifiySoz = sozlar[tasodifiyRaqam].inglizcha
+
+                if (!royxat.includes(tasodifiySoz)) {
+                    royxat.push(tasodifiySoz)
                 }
             }
 
-            list.sort(() => Math.random() - 0.5)
-            setOptions(list)
-            setSelected("")
+            royxat.sort(() => Math.random() - 0.5)
+            setVariantlar(royxat)
         }
-    }, [currentIndex, data])
+    }, [raqam, sozlar])
 
-    function handleNext() {
-        if (selected === "") {
-            alert("Iltimos, variantni tanlang!")
-            return
+    function keyingiSavol() {
+        if (raqam === sozlar.length - 1) {
+            setTugadi(true)
+        } else {
+            setRaqam(raqam + 1)
         }
+    }
 
-        if (selected !== data[currentIndex].english) {
+    function javobBerish(tanlangan) {
+        if (tanlangan !== sozlar[raqam].inglizcha) {
             alert("Xato javob! Yana bir bor urinib ko'ring.")
             return
         }
 
-        if (currentIndex === data.length - 1) {
-            setIsFinished(true)
-        } else {
-            setCurrentIndex(currentIndex + 1)
-        }
+        keyingiSavol()
     }
 
-    if (data.length === 0) {
+    if (sozlar.length === 0) {
         return <h1 style={{ color: 'white', textAlign: 'center', marginTop: '100px' }}>Ma'lumot yo'q</h1>
     }
 
-    if (isFinished) {
+    if (tugadi) {
         return (
             <section className="section4">
                 <div className="test-card">
                     <h1 className='end-title'>Barcha testlar tugadi!</h1>
                     <button className="next-btn" onClick={() => {
-                        setCurrentIndex(0)
-                        setIsFinished(false)
+                        setRaqam(0)
+                        setTugadi(false)
                     }}>
                         Qaytadan boshlash
                     </button>
@@ -68,24 +84,21 @@ function Test({ data }) {
     return (
         <section className="section4">
             <div className="test-card">
-                <h3>{currentIndex + 1} / {data.length}</h3>
-                <h1>{data[currentIndex].uzbek}</h1>
+                <div className="timer">{vaqt}</div>
+                <h3>{raqam + 1} / {sozlar.length}</h3>
+                <h1>{sozlar[raqam].ozbekcha}</h1>
 
                 <div className="options">
-                    {options.map((opt, index) => (
+                    {variantlar.map((variant, i) => (
                         <button
-                            key={index}
-                            className={selected === opt ? "option-btn active" : "option-btn"}
-                            onClick={() => setSelected(opt)}
+                            key={i}
+                            className="option-btn"
+                            onClick={() => javobBerish(variant)}
                         >
-                            {opt}
+                            {variant}
                         </button>
                     ))}
                 </div>
-
-                <button className="next-btn" onClick={handleNext}>
-                    {currentIndex === data.length - 1 ? "Tugatish" : "Davom etish"}
-                </button>
             </div>
         </section>
     )

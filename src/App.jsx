@@ -7,42 +7,41 @@ import Test from './pages/Test/Test'
 import Infos from './pages/Infos/Infos'
 
 function App() {
-  const defaultData = [
-    { id: 1, english: "Apple", uzbek: "Olma", category: "Fruits", learned: false },
-    { id: 2, english: "Book", uzbek: "Kitob", category: "Education", learned: false },
-    { id: 3, english: "Beautiful", uzbek: "Chiroyli", category: "Adjectives", learned: false },
-    { id: 4, english: "Run", uzbek: "Yugurmoq", category: "Verbs", learned: false },
-    { id: 5, english: "House", uzbek: "Uy", category: "Places", learned: false },
-    { id: 6, english: "Friend", uzbek: "Do'st", category: "People", learned: false },
-    { id: 7, english: "Water", uzbek: "Suv", category: "Nature", learned: false },
-    { id: 8, english: "Happy", uzbek: "Xursand", category: "Emotions", learned: false },
-    { id: 9, english: "Computer", uzbek: "Kompyuter", category: "Technology", learned: false },
-    { id: 10, english: "School", uzbek: "Maktab", category: "Education", learned: false }
+  const boshlangichSozlar = [
+    { id: 1, inglizcha: "Apple", ozbekcha: "Olma", kategoriya: "Fruits", yodlangan: false },
+    { id: 2, inglizcha: "Book", ozbekcha: "Kitob", kategoriya: "Education", yodlangan: false },
+    { id: 3, inglizcha: "Beautiful", ozbekcha: "Chiroyli", kategoriya: "Adjectives", yodlangan: false },
+    { id: 4, inglizcha: "Run", ozbekcha: "Yugurmoq", kategoriya: "Verbs", yodlangan: false },
+    { id: 5, inglizcha: "House", ozbekcha: "Uy", kategoriya: "Places", yodlangan: false },
+    { id: 6, inglizcha: "Friend", ozbekcha: "Do'st", kategoriya: "People", yodlangan: false },
+    { id: 7, inglizcha: "Water", ozbekcha: "Suv", kategoriya: "Nature", yodlangan: false },
+    { id: 8, inglizcha: "Happy", ozbekcha: "Xursand", kategoriya: "Emotions", yodlangan: false },
+    { id: 9, inglizcha: "Computer", ozbekcha: "Kompyuter", kategoriya: "Technology", yodlangan: false },
+    { id: 10, inglizcha: "School", ozbekcha: "Maktab", kategoriya: "Education", yodlangan: false }
   ]
 
-
-  const [data, setData] = useState(() => {
+  const [sozlar, setSozlar] = useState(() => {
     try {
-      const saved = localStorage.getItem('lugat-data')
-      return saved ? JSON.parse(saved) : defaultData
+      const saqlangan = localStorage.getItem('lugat-sozlar')
+      return saqlangan ? JSON.parse(saqlangan) : boshlangichSozlar
     } catch {
-      return defaultData
+      return boshlangichSozlar
     }
   })
 
   useEffect(() => {
-    localStorage.setItem('lugat-data', JSON.stringify(data))
-  }, [data])
+    localStorage.setItem('lugat-sozlar', JSON.stringify(sozlar))
+  }, [sozlar])
 
   return (
     <div className='body'>
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route path='/' element={<Home data={data} setData={setData} />} />
-          <Route path='/add' element={<Add data={data} setData={setData} />} />
-          <Route path='/test' element={<Test data={data} />} />
-          <Route path='/info' element={<Infos data={data} />} />
+          <Route path='/' element={<Home sozlar={sozlar} setSozlar={setSozlar} />} />
+          <Route path='/add' element={<Add setSozlar={setSozlar} />} />
+          <Route path='/test' element={<Test sozlar={sozlar} />} />
+          <Route path='/info' element={<Infos sozlar={sozlar} />} />
         </Routes>
       </BrowserRouter>
     </div>
