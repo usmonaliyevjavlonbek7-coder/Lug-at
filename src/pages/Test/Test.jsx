@@ -6,6 +6,7 @@ function Test({ sozlar }) {
     const [variantlar, setVariantlar] = useState([])
     const [tugadi, setTugadi] = useState(false)
     const [vaqt, setVaqt] = useState(10)
+    const [modal, setModal] = useState({ ochiq: false, xabar: '', tur: '' })
 
     useEffect(() => {
         if (tugadi) {
@@ -20,8 +21,7 @@ function Test({ sozlar }) {
 
     useEffect(() => {
         if (vaqt === 0 && !tugadi) {
-            alert("Vaqt tugadi!")
-            keyingiSavol()
+            setModal({ ochiq: true, xabar: "Vaqt tugadi!", tur: 'vaqt' })
         }
     }, [vaqt])
 
@@ -54,11 +54,19 @@ function Test({ sozlar }) {
 
     function javobBerish(tanlangan) {
         if (tanlangan !== sozlar[raqam].inglizcha) {
-            alert("Xato javob! Yana bir bor urinib ko'ring.")
+            setModal({ ochiq: true, xabar: "Xato javob! Yana bir bor urinib ko'ring.", tur: 'xato' })
             return
         }
 
         keyingiSavol()
+    }
+
+    function modalniYopish() {
+        const tur = modal.tur
+        setModal({ ochiq: false, xabar: '', tur: '' })
+        if (tur === 'vaqt') {
+            keyingiSavol()
+        }
     }
 
     if (sozlar.length === 0) {
@@ -100,6 +108,15 @@ function Test({ sozlar }) {
                     ))}
                 </div>
             </div>
+
+            {modal.ochiq && (
+                <div className="modal-overlay" onClick={modalniYopish}>
+                    <div className="modal-box" onClick={(e) => e.stopPropagation()}>
+                        <p className="modal-xabar">{modal.xabar}</p>
+                        <button className="modal-btn" onClick={modalniYopish}>OK</button>
+                    </div>
+                </div>
+            )}
         </section>
     )
 }
